@@ -1,15 +1,15 @@
-import Hero from "@/components/hero";
-import ConnectSupabaseSteps from "@/components/tutorial/connect-supabase-steps";
-import SignUpUserSteps from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+import BlogDataPage from "@/components/layout/home/page";
 
 export default async function Home() {
+  const data = await fetch("http://localhost:3000/api/blog_data");
+  const posts = await data.json();
+
+  console.log(posts);
+
   return (
     <>
-      <Hero />
-      <main className="flex-1 flex flex-col gap-6 px-4">
-        <h2 className="font-medium text-xl mb-4">Next steps</h2>
-        {hasEnvVars ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
+      <main className="flex flex-1 flex-col gap-6 px-4">
+        <BlogDataPage blogs={posts} />
       </main>
     </>
   );
