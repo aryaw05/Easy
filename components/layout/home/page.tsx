@@ -12,7 +12,6 @@ export default function BlogDataPage({ blogs }: any) {
 
   return (
     <div>
-      <h1>Blog Data</h1>
       {blogs?.data?.map((e: any, index: number) => {
         const dataHeader = {
           text: e?.content?.blocks[0]?.data?.text,
@@ -22,7 +21,7 @@ export default function BlogDataPage({ blogs }: any) {
           return (
             <div
               key={index}
-              className="mb-5 w-full cursor-pointer rounded border border-black"
+              className="mb-5 w-full cursor-pointer rounded"
               onClick={() => detailPage(e)}
             >
               <h1 className="font-bold">{e.title}</h1>

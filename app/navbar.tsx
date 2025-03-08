@@ -1,26 +1,34 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import Link from "next/link";
+import { Anton } from "next/font/google";
 
+const anton = Anton({ weight: "400", subsets: ["latin"] });
 export default function Navbar() {
-  const { data: session, status }: { data: any; status: string } = useSession();
+  const { status } = useSession();
 
   return (
-    <nav className="w-full bg-gray-500 p-5">
+    <nav className="w-full bg-black p-5">
       <div>
-        <h1>{session?.user?.name || "Guest"}</h1>
-      </div>
-      <div className="text-white">
-        <h1>Navbar</h1>
+        <h1
+          className={`${anton.className} text-center font-[Anton] text-3xl text-white`}
+        >
+          EASY
+        </h1>
         {status === "authenticated" ? (
-          <button className="rounded-lg px-4 py-2" onClick={() => signOut()}>
+          <button
+            className="rounded-lg px-4 py-2 text-white"
+            onClick={() => signOut()}
+          >
             Logout
           </button>
         ) : (
-          <button className="rounded-lg px-4 py-2" onClick={() => signIn()}>
+          <button
+            className="rounded-lg px-4 py-2 text-white"
+            onClick={() => signIn()}
+          >
             Login
           </button>
         )}
-        <Link href={"/blog-write"}>Tulis Blog</Link>
+        {/* <Link href={"/blog-write"}>Tulis Blog</Link> */}
       </div>
     </nav>
   );
