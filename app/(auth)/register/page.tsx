@@ -47,9 +47,13 @@ export default function RegisterPage() {
         onSubmit={(e) => SubmitRegister(e)}
       >
         <div className="w-full">
+          <label htmlFor="" className="font-bold">
+            Username
+          </label>
+
           <input
             type="text"
-            placeholder="Username"
+            placeholder="John Doe"
             name="username"
             className="w-full p-5 after:appearance-none focus:outline-none active:border-0"
           />
@@ -57,6 +61,10 @@ export default function RegisterPage() {
         </div>
 
         <div className="w-full">
+          <label htmlFor="" className="font-bold">
+            Email
+          </label>
+
           <input
             type="email"
             placeholder="johndoe@gmail.com"
@@ -66,11 +74,15 @@ export default function RegisterPage() {
           <hr className="w-full border-2 border-black" />
         </div>
         <div className="w-full">
+          <label htmlFor="" className="font-bold">
+            Password
+          </label>
+
           <input
             type="password"
             placeholder="********"
             name="password"
-            className="w-full p-5 after:appearance focus:outline-none active:border-0"
+            className="after:appearance w-full p-5 focus:outline-none active:border-0"
           />
           <hr className="w-full border-2 border-black" />
         </div>
