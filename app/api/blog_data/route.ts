@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const postsID = searchParams.get("postsID");  
+  const postsID = searchParams.get("postsID");
 
   if (postsID) {
     const detailBlog = await getBlogDataByPostsId(Number(postsID));

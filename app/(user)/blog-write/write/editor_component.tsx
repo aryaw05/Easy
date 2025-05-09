@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 
 export default function EditorComponent() {
   // const [data, setData] = useState<OutputData | null>(null);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+
   const [title, setTitle] = useState("");
   const { data: session }: { data: any } = useSession();
   const editorRef = useRef<EditorJS | null>(null);
@@ -16,9 +18,10 @@ export default function EditorComponent() {
     if (!editorRef.current) {
       const editor = new EditorJS({
         holder: "editorjs",
-        tools: EDITOR_JS_TOOLS,
+        tools: EDITOR_JS_TOOLS(setIsUploadingImage),
         placeholder: "Let`s write an awesome story!",
       });
+      console.log(editor.holder);
 
       editorRef.current = editor;
     }
@@ -61,10 +64,11 @@ export default function EditorComponent() {
       />
       <div id="editorjs" className="min-h-[300px] p-4" />
       <button
+        disabled={isUploadingImage}
         onClick={() => handleSubmit()}
         className="mt-4 rounded bg-blue-500 px-4 py-2 text-white"
       >
-        Submit
+        {isUploadingImage ? "Uploading..." : "Submit"}
       </button>
     </div>
   );

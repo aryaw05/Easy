@@ -12,6 +12,7 @@ export async function addBlogData(data: any) {
     user_id: user,
     title: data.title,
     content: data.data,
+    is_published: true,
   });
   if (!errorBlogData) {
     return {
