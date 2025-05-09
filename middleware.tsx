@@ -10,5 +10,5 @@ export default withAuth(mainMiddleware, [
   "/login",
   "/register",
   "/dashboard",
-  "/blog-write/editor",
+  "/blog-write",
 ]);
