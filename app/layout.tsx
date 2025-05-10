@@ -7,6 +7,7 @@ import Navbar from "./navbar";
 import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 
+import "../lib/icon/font_awesome";
 // const defaultUrl = process.env.VERCEL_URL
 //   ? `https://${process.env.VERCEL_URL}`
 //   : "http://localhost:3000";

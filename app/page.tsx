@@ -4,7 +4,7 @@ export default async function Home() {
   const data = await fetch("http://localhost:3000/api/blog_data");
   const posts = await data.json();
 
-  console.log(posts);
+  console.log("ini halaman pertama", posts);
 
   return (
     <>
