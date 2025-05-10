@@ -4,6 +4,7 @@ import EditorJS, { OutputData } from "@editorjs/editorjs";
 import { EDITOR_JS_TOOLS } from "../(tools)/tool";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export default function EditorComponent() {
   // const [data, setData] = useState<OutputData | null>(null);
@@ -21,21 +22,51 @@ export default function EditorComponent() {
         tools: EDITOR_JS_TOOLS(setIsUploadingImage),
         placeholder: "Let`s write an awesome story!",
       });
-      console.log(editor.holder);
 
       editorRef.current = editor;
     }
   }, []);
 
   const userDataEmail = session?.user?.email;
-  const handleSubmit = async () => {
+  const handlePublish = async () => {
     if (editorRef.current) {
       const savedData = await editorRef.current.saver.save();
       const blogData = {
         title,
         data: savedData,
         userData: userDataEmail,
+        is_published: true,
       };
+      console.log(blogData);
+
+      // addBlogData(blogData);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/dashboard/editor`,
+        {
+          method: "POST",
+          body: JSON.stringify(blogData),
+        },
+      ).then((res) => res.json());
+
+      if (res.status) {
+        push("/dashboard");
+      } else {
+        console.log(res.message);
+      }
+    }
+  };
+
+  const handleSaveDraft = async () => {
+    if (editorRef.current) {
+      const savedData = await editorRef.current.saver.save();
+      const blogData = {
+        title,
+        data: savedData,
+        userData: userDataEmail,
+        is_published: false,
+      };
+      console.log(blogData);
+
       // addBlogData(blogData);
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/dashboard/editor`,
@@ -55,21 +86,28 @@ export default function EditorComponent() {
 
   return (
     <div>
-      <input
-        type="text"
-        className="mb-2 w-full appearance-none p-2 text-3xl focus:outline-none active:border-0"
-        placeholder="Insert Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <div id="editorjs" className="min-h-[300px] p-4" />
-      <button
-        disabled={isUploadingImage}
-        onClick={() => handleSubmit()}
-        className="mt-4 rounded bg-blue-500 px-4 py-2 text-white"
-      >
-        {isUploadingImage ? "Uploading..." : "Submit"}
-      </button>
+      <nav className="flex justify-end gap-4">
+        <Button disabled={isUploadingImage} onClick={() => handlePublish()}>
+          Publish
+        </Button>
+        <Button
+          variant="secondary"
+          disabled={isUploadingImage}
+          onClick={() => handleSaveDraft()}
+        >
+          <a href="/dashboard">Save Draft</a>
+        </Button>
+      </nav>
+      <div className="mt-3">
+        <input
+          type="text"
+          className="mb-2 w-full appearance-none p-2 text-3xl focus:outline-none active:border-0"
+          placeholder="Insert Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <div id="editorjs" className="min-h-[300px] p-4" />
+      </div>
     </div>
   );
 }
