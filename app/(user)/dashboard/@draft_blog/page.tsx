@@ -8,8 +8,6 @@ export default async function DraftBlogPage() {
   const userBlogData = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/dashboard/show-user-blog?userID=${session?.user?.id}`,
   ).then((res) => res.json());
-
-  console.log(userBlogData);
   return (
     <div>
       <h1>Dashboard</h1>

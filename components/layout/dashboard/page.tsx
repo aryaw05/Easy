@@ -1,5 +1,7 @@
 "use client";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { ParagraphBlock } from "editorjs-blocks-react-renderer";
+import { getServerSession } from "next-auth";
 import { useRouter } from "next/navigation";
 
 export default function DashboardPageView({
@@ -12,6 +14,7 @@ export default function DashboardPageView({
   dataHeader: any;
 }) {
   const { push } = useRouter();
+
   const deleteData = async (e: number) => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/dashboard/delete_data?id=${e}`,
