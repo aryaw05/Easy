@@ -54,6 +54,7 @@ export const authOptions: NextAuthOptions = {
       if (account?.provider === "credentials") {
         token.email = user.email;
         token.username = user.username;
+        token.id = user.id;
       }
       if (account?.provider === "google") {
         const data = {
