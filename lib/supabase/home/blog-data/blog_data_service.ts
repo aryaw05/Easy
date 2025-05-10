@@ -1,7 +1,12 @@
 import { supabase } from "../../utils";
 
 export async function getAllBlogData() {
-  const { data, error } = await supabase.from("posts").select();
+  const { data, error } = await supabase.from("posts").select(
+    `
+    id, title, content, create_at, is_updated ,is_published,
+    users (username, email) 
+  `,
+  );
   if (data) {
     return { status: true, statusCode: 200, data };
   } else {
