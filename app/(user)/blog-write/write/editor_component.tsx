@@ -87,10 +87,15 @@ export default function EditorComponent() {
   return (
     <div>
       <nav className="flex justify-end gap-4">
-        <Button disabled={isUploadingImage} onClick={() => handlePublish()}>
+        <Button
+          disabled={isUploadingImage}
+          onClick={() => handlePublish()}
+          className="py-7"
+        >
           Publish
         </Button>
         <Button
+          className="py-7"
           variant="secondary"
           disabled={isUploadingImage}
           onClick={() => handleSaveDraft()}
