@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
+import { DialogPreview } from "@/components/elements/dialogPrev/page";
+
 export default function EditorComponent() {
   // const [data, setData] = useState<OutputData | null>(null);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
@@ -87,13 +89,15 @@ export default function EditorComponent() {
   return (
     <div>
       <nav className="flex justify-end gap-4">
-        <Button
-          disabled={isUploadingImage}
-          onClick={() => handlePublish()}
-          className="py-7"
-        >
-          Publish
-        </Button>
+        <DialogPreview>
+          <Button
+            disabled={isUploadingImage}
+            // onClick={() => handlePublish()}
+            className="py-7"
+          >
+            Publish
+          </Button>
+        </DialogPreview>
         <Button
           className="py-7"
           variant="secondary"
