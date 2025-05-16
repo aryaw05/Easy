@@ -5,7 +5,7 @@ export default function Loading() {
     <div className="mx-auto max-w-screen-sm px-4 py-6">
       <article>
         <header className="mb-4">
-          <Skeleton className="h-[72px] w-10/12 rounded-none" />
+          <Skeleton className="h-[72px] w-2/6 rounded-none" />
           <div className="mt-5 flex gap-2">
             <Skeleton className="h-3 w-20 rounded-none" />
             <Skeleton className="h-3 w-20 rounded-none" />
