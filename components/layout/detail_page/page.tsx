@@ -15,7 +15,7 @@ export default function DetailBlogPageLayout(blogData: any) {
       {blogData.blogData.data.content && (
         <article>
           <header className="mb-4">
-            <h1 className="mb-2 text-7xl font-extrabold leading-tight tracking-tight">
+            <h1 className="mx-auto mb-2 max-w-2xl break-words text-6xl font-extrabold leading-tight tracking-tight">
               {blogData.blogData.data.title}
             </h1>
             <div className="mb-1 text-sm font-medium text-gray-600">
