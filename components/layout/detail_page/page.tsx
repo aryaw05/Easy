@@ -1,29 +1,32 @@
-"use-client";
+"use client";
+import { Skeleton } from "@/components/ui/skeleton";
 import Blocks from "editorjs-blocks-react-renderer";
 
 export default function DetailBlogPageLayout(blogData: any) {
-  console.log(blogData.blogData);
   const timestamp = blogData.blogData.data.create_at;
   const dateWIB = new Intl.DateTimeFormat("id-ID", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: "Asia/Jakarta",
   }).format(new Date(timestamp));
+
   return (
-    <div>
-      <div>halaman detail Produk</div>
+    <div className="mx-auto max-w-screen-sm px-4 py-6">
       {blogData.blogData.data.content && (
-        <div>
-          <h1 className="text-3xl font-bold">{blogData.blogData.data.title}</h1>
-          <h1 className="font-bold">
-            Create at : {dateWIB} {blogData.blogData.data.is_updated ? "Edited" : " "}
-          </h1>
-          <h1 className="font-bold">
-            Creator : {blogData.blogData.data.users.username}
-          </h1>
+        <article>
+          <header className="mb-4">
+            <h1 className="mb-2 text-7xl font-extrabold leading-tight tracking-tight">
+              {blogData.blogData.data.title}
+            </h1>
+            <div className="mb-1 text-sm font-medium text-gray-600">
+              Create at: {dateWIB}{" "}
+              {blogData.blogData.data.is_updated ? "(Edited)" : ""}
+            </div>
+            <div className="text-sm font-medium text-gray-600">
+              Creator: {blogData.blogData.data.users.username}
+            </div>
+          </header>
+
           <Blocks
             data={blogData.blogData.data.content}
             config={{
@@ -31,40 +34,41 @@ export default function DetailBlogPageLayout(blogData: any) {
                 className: "language-js",
               },
               delimiter: {
-                className: "border border-2 w-16 mx-auto",
+                className: "border border-2 w-16 mx-auto my-4",
               },
               embed: {
                 className: "border-0",
               },
               header: {
-                className: "font-bold",
+                className: "font-bold text-lg my-3",
               },
               image: {
-                className: "w-full max-w-screen-md",
+                className: "w-full max-w-full my-4",
                 actionsClassNames: {
-                  stretched: "w-full h-80 object-cover",
+                  stretched: "w-full h-64 object-cover",
                   withBorder: "border border-2",
                   withBackground: "p-2",
                 },
               },
               list: {
-                className: "list-inside",
+                className: "list-disc list-inside my-2",
               },
               paragraph: {
-                className: "text-base text-opacity-75",
+                className: "text-base text-gray-800 leading-relaxed mb-4",
                 actionsClassNames: {
-                  alignment: "text-{alignment}", // This is a substitution placeholder: left or center.
+                  alignment: "text-{alignment}",
                 },
               },
               quote: {
-                className: "py-3 px-5 italic font-serif",
+                className:
+                  "py-3 px-5 italic font-serif border-l-4 border-gray-300 bg-gray-50 my-4",
               },
               table: {
-                className: "table-auto",
+                className: "table-auto border border-collapse my-4",
               },
             }}
           />
-        </div>
+        </article>
       )}
     </div>
   );
