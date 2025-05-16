@@ -5,11 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Anton } from "next/font/google";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const anton = Anton({ weight: "400", subsets: ["latin"] });
 
-const {push} = useRouter();
 export default function Navbar() {
+  // const { push } = useRouter();
   const { status } = useSession();
   const [open, setMenuOpen] = useState("hidden");
   function openMenu() {
@@ -20,15 +22,18 @@ export default function Navbar() {
     }
   }
   return (
-    <nav className="fixed w-full bg-black px-10 py-5">
+    <nav className="w-full bg-black px-10 py-5">
       <div className="flex justify-between">
         <div className="flex items-center gap-5">
           <button onClick={openMenu}>
             <FontAwesomeIcon icon={faBars} className="text-2xl text-white" />
           </button>
-          <h1 className={`${anton.className} font-[Anton] text-3xl text-white`}>
+          <Link
+            href={"/"}
+            className={`${anton.className} font-[Anton] text-3xl text-white`}
+          >
             EASY
-          </h1>
+          </Link>
         </div>
 
         {status === "authenticated" ? (
@@ -50,9 +55,11 @@ export default function Navbar() {
       </div>
       {/* tampilan Menu */}
       <div className={` ${open} h-96 w-full bg-black py-5 text-white`}>
-        <h1 className="text-6xl">Tulis Blog</h1>
-        <h1>Dashboard</h1>
-        <h1>Home</h1>
+        <Link href={"/blog-write"} className="text-6xl">
+          Tulis Blog
+        </Link>
+        <Link href={"/dashboard"}>Dashboard</Link>
+        <Link href={"/"}>Home</Link>
       </div>
     </nav>
   );
