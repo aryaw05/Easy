@@ -53,13 +53,30 @@ export default function Navbar() {
         )}
         {/* <Link href={"/blog-write"}>Tulis Blog</Link> */}
       </div>
+
       {/* tampilan Menu */}
       <div className={` ${open} h-96 w-full bg-black py-5 text-white`}>
-        <Link href={"/blog-write"} className="text-6xl">
-          Tulis Blog
-        </Link>
-        <Link href={"/dashboard"}>Dashboard</Link>
-        <Link href={"/"}>Home</Link>
+        <div className="flex flex-col gap-10">
+          <Link
+            href={"/blog-write"}
+            className={`${anton.className} font-[Anton] text-5xl text-white`}
+          >
+            Tulis Blog
+          </Link>
+          <Link
+            href={"/dashboard"}
+            className={`${anton.className} font-[Anton] text-5xl text-white`}
+          >
+            Dashboard
+          </Link>
+          <Link
+            href={"/"}
+            className={`${anton.className} font-[Anton] text-5xl text-white`}
+          >
+            Home
+          </Link>
+          <h1> Copyright © 2025 Eaasy. All rights reserved.</h1>
+        </div>
       </div>
     </nav>
   );
