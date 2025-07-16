@@ -7,7 +7,7 @@ export default function BlogDataPage({ blogs }: any) {
   const { push } = useRouter();
 
   const detailPage = (e: any) => {
-    push(`/blog/${e.id}`);
+    push(`/blog/detail/${e.id}`);
   };
 
   return (

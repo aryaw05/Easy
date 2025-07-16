@@ -11,11 +11,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function DialogPreview(props) {
+export function DialogPreview(props: any) {
   const { children } = props;
   return (
     <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger asChild>
+        <Button className="py-7">Publish</Button>
+      </DialogTrigger>
       <DialogContent className="w-">
         <DialogHeader>
           <DialogTitle>are you sure?</DialogTitle>
@@ -28,18 +30,16 @@ export function DialogPreview(props) {
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
+            <Input id="name" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Username
             </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
+            <Input id="username" className="col-span-3" />
           </div>
         </div>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
+        <DialogFooter>{children}</DialogFooter>
       </DialogContent>
     </Dialog>
   );

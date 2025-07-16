@@ -67,9 +67,7 @@ export default function EditorComponent() {
         userData: userDataEmail,
         is_published: false,
       };
-      console.log(blogData);
 
-      // addBlogData(blogData);
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/dashboard/editor`,
         {
@@ -92,7 +90,7 @@ export default function EditorComponent() {
         <DialogPreview>
           <Button
             disabled={isUploadingImage}
-            // onClick={() => handlePublish()}
+            onClick={() => handlePublish()}
             className="py-7"
           >
             Publish
@@ -104,7 +102,7 @@ export default function EditorComponent() {
           disabled={isUploadingImage}
           onClick={() => handleSaveDraft()}
         >
-          <a href="/dashboard">Save Draft</a>
+          Save Draft
         </Button>
       </nav>
       <div className="mt-3">
@@ -112,7 +110,8 @@ export default function EditorComponent() {
           type="text"
           className="mb-2 w-full appearance-none p-2 text-3xl focus:outline-none active:border-0"
           placeholder="Insert Title"
-          value={title}
+          // defaultValue={title}
+          name="title"
           onChange={(e) => setTitle(e.target.value)}
         />
         <div id="editorjs" className="min-h-[300px] p-4" />

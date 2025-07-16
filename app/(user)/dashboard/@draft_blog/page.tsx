@@ -11,7 +11,7 @@ export default async function DraftBlogPage() {
   return (
     <div>
       <h1>Dashboard</h1>
-      {userBlogData?.data?.map((e: any) => {
+      {userBlogData?.data?.map((e: any, index: number) => {
         const dataHeader = {
           text: e.content?.blocks[0]?.data?.text,
         };
@@ -21,6 +21,7 @@ export default async function DraftBlogPage() {
               title={e.title}
               dataHeader={dataHeader}
               id={e.id}
+              key={index}
             />
           );
         } else {
@@ -28,6 +29,7 @@ export default async function DraftBlogPage() {
             title={e.title}
             dataHeader={dataHeader}
             id={e.id}
+            key={index}
           />;
         }
       })}
