@@ -45,8 +45,8 @@ export async function deleteBlogDataByBlogId(blogID: number) {
 }
 function extractImageUrls(data: any) {
   let imageUrl;
-  data.forEach((e) => {
-    e?.blocks?.forEach((element) => {
+  data.forEach((e: any) => {
+    e?.blocks?.forEach((element: any) => {
       if (element.type === "image") {
         imageUrl = element.data.file.url;
       }
