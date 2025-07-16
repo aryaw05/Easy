@@ -61,7 +61,7 @@ export default function Navbar() {
             href={"/blog-write"}
             className={`${anton.className} font-[Anton] text-5xl text-white`}
           >
-            Tulis Blog
+            Write Blog
           </Link>
           <Link
             href={"/dashboard"}
