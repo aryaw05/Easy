@@ -89,13 +89,12 @@ export default function LoginPage() {
               Sign Up!
             </Link>
           </h2>
-
           <button
             className="mt-4 w-full border-2 border-black p-2"
             type="button"
             onClick={() => signIn("google", { callbackUrl, redirect: false })}
           >
-            <FontAwesomeIcon icon={faGoogle} className="mr-2"/>
+            <FontAwesomeIcon icon={faGoogle} className="mr-2" />
             Login With Google
           </button>
         </div>
