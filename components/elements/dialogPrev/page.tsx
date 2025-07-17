@@ -8,11 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 export function DialogPreview(props: any) {
-  const { children } = props;
+  const { children, input, onClick, disabled, Description } = props;
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -20,26 +18,19 @@ export function DialogPreview(props: any) {
       </DialogTrigger>
       <DialogContent className="w-">
         <DialogHeader>
-          <DialogTitle>are you sure?</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
+          <DialogTitle>{input?.title}</DialogTitle>
+          <DialogDescription>{Description}</DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" className="col-span-3" />
-          </div>
-        </div>
-        <DialogFooter>{children}</DialogFooter>
+        <div className="grid gap-4 py-4">{children}</div>
+        <DialogFooter>
+          <Button
+            disabled={disabled}
+            onClick={() => onClick()}
+            className="py-7"
+          >
+            Publish
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

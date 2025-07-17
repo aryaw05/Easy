@@ -13,6 +13,7 @@ export async function addBlogData(data: any) {
     title: data.title,
     content: data.data,
     is_published: data.is_published,
+    slug: data.slug,
   });
   if (!errorBlogData) {
     return {

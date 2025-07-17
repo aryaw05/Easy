@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import { EDITOR_JS_TOOLS } from "../(tools)/tool";
 import { useSession } from "next-auth/react";
@@ -7,21 +7,24 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 import { DialogPreview } from "@/components/elements/dialogPrev/page";
+import { Label } from "@radix-ui/react-label";
+import Input from "@/components/elements/input/page";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function EditorComponent() {
-  // const [data, setData] = useState<OutputData | null>(null);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
-
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState({ title: "", slug: "" });
   const { data: session }: { data: any } = useSession();
   const editorRef = useRef<EditorJS | null>(null);
   const { push } = useRouter();
-
+  const editorTools = useMemo(() => {
+    return EDITOR_JS_TOOLS(setIsUploadingImage);
+  }, [isUploadingImage]);
   useEffect(() => {
     if (!editorRef.current) {
       const editor = new EditorJS({
         holder: "editorjs",
-        tools: EDITOR_JS_TOOLS(setIsUploadingImage),
+        tools: editorTools,
         placeholder: "Let`s write an awesome story!",
       });
 
@@ -34,12 +37,12 @@ export default function EditorComponent() {
     if (editorRef.current) {
       const savedData = await editorRef.current.saver.save();
       const blogData = {
-        title,
+        title: title.title,
         data: savedData,
         userData: userDataEmail,
         is_published: true,
+        slug: title.slug,
       };
-      console.log(blogData);
 
       // addBlogData(blogData);
       const res = await fetch(
@@ -87,14 +90,39 @@ export default function EditorComponent() {
   return (
     <div>
       <nav className="flex justify-end gap-4">
-        <DialogPreview>
-          <Button
-            disabled={isUploadingImage}
-            onClick={() => handlePublish()}
-            className="py-7"
-          >
-            Publish
-          </Button>
+        <DialogPreview
+          onClick={handlePublish}
+          disabled={isUploadingImage}
+          Description={
+            "Just a heads-up: This only changes how your story looks in public spaces and emails. The content of your story stays exactly the same."
+          }
+        >
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Title
+            </Label>
+            <Input
+              id="name"
+              disabled
+              className="col-span-5"
+              value={title.title}
+            />
+          </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Insert Slug
+            </Label>
+            <Textarea
+              id="name"
+              className="col-span-3"
+              placeholder="Insert Slug"
+              name="slug"
+              onChange={(e) =>
+                setTitle((prev) => ({ ...prev, slug: e.target.value }))
+              }
+            />
+          </div>
         </DialogPreview>
         <Button
           className="py-7"
@@ -110,9 +138,10 @@ export default function EditorComponent() {
           type="text"
           className="mb-2 w-full appearance-none p-2 text-3xl focus:outline-none active:border-0"
           placeholder="Insert Title"
-          // defaultValue={title}
           name="title"
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) =>
+            setTitle((prev) => ({ ...prev, title: e.target.value }))
+          }
         />
         <div id="editorjs" className="min-h-[300px] p-4" />
       </div>

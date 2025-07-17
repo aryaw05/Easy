@@ -9,7 +9,6 @@ export default function DashboardPageView({
   id,
   title,
   dataHeader,
-  create_at,
 }: {
   id: number;
   title: string;
@@ -17,10 +16,6 @@ export default function DashboardPageView({
   create_at: any;
 }) {
   const { push } = useRouter();
-  const paragraphBlock = useMemo(
-    () => <ParagraphBlock data={dataHeader} className="whitespace-normal" />,
-    [dataHeader],
-  );
 
   const deleteData = async (e: number) => {
     const res = await fetch(
@@ -38,7 +33,7 @@ export default function DashboardPageView({
     <div className="mb-5" key={id}>
       <h1 className="font-bold">{title}</h1>
       <div className="truncate">
-        {paragraphBlock}
+        {dataHeader}
         {/* <button className="mx-4 bg-red-400 p-4" onClick={() => deleteData(id)}>
           Delete
         </button>
