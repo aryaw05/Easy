@@ -10,7 +10,6 @@ export default async function DraftBlogPage() {
   ).then((res) => res.json());
   return (
     <div>
-      <h1>Dashboard</h1>
       {userBlogData?.data?.map((e: any, index: number) => {
         const dataHeader = {
           text: e.content?.blocks[0]?.data?.text,

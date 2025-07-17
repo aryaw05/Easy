@@ -1,5 +1,4 @@
 "use client";
-import { Skeleton } from "@/components/ui/skeleton";
 import Blocks from "editorjs-blocks-react-renderer";
 
 export default function DetailBlogPageLayout(blogData: any) {

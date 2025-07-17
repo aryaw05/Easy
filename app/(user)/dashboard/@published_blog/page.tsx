@@ -8,11 +8,10 @@ export default async function DashboardPage() {
   const userBlogData = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/dashboard/show-user-blog?userID=${session?.user?.id}`,
   ).then((res) => res.json());
-  console.log("published", session);
+  console.log("published", userBlogData);
 
   return (
     <div>
-      <h1>Dashboard</h1>
       {userBlogData?.data?.map((e: any) => {
         const dataHeader = {
           text: e.content?.blocks[0]?.data?.text,
@@ -23,6 +22,7 @@ export default async function DashboardPage() {
               title={e.title}
               dataHeader={dataHeader}
               id={e.id}
+              create_at = {e.create_at}
             />
           );
         } else {
@@ -30,6 +30,7 @@ export default async function DashboardPage() {
             title={e.title}
             dataHeader={dataHeader}
             id={e.id}
+            create_at={e.create_at}
           />;
         }
       })}
