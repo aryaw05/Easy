@@ -4,7 +4,7 @@ export async function getAllBlogData() {
   const { data, error } = await supabase.from("posts").select(
     `
     id, title, content, create_at, is_updated ,is_published,
-    users (username, email) 
+    users (username, email) , slug 
   `,
   );
   if (data) {
