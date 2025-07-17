@@ -1,9 +1,5 @@
 "use client";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { ParagraphBlock } from "editorjs-blocks-react-renderer";
-import { getServerSession } from "next-auth";
 import { useRouter } from "next/navigation";
-import { useMemo } from "react";
 
 export default function DashboardPageView({
   id,

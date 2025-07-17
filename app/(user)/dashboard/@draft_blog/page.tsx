@@ -11,25 +11,16 @@ export default async function DraftBlogPage() {
   return (
     <div>
       {userBlogData?.data?.map((e: any, index: number) => {
-        const dataHeader = {
-          text: e.content?.blocks[0]?.data?.text,
-        };
         if (!e.is_published) {
           return (
             <DashboardPageView
+              create_at={e.create_at}
               title={e.title}
-              dataHeader={dataHeader}
+              dataHeader={e.slug}
               id={e.id}
-              key={index}
+              key={e.id}
             />
           );
-        } else {
-          <DashboardPageView
-            title={e.title}
-            dataHeader={dataHeader}
-            id={e.id}
-            key={index}
-          />;
         }
       })}
     </div>

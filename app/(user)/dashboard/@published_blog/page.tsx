@@ -21,13 +21,6 @@ export default async function DashboardPage() {
               create_at={e.create_at}
             />
           );
-        } else {
-          <DashboardPageView
-            title={e.title}
-            dataHeader={e.slug ?? ""}
-            id={e.id}
-            create_at={e.create_at}
-          />;
         }
       })}
     </div>
